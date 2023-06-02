@@ -1,0 +1,32 @@
+
+- name: Install Apache Web-Server & host a Web-Page
+  hosts: webserver
+  become: yes
+  vars:
+    config_file_localhost: ./index.html
+  
+  tasks:
+    - name: Install Apache
+      ansible.builtin.package:
+        name: httpd
+        state: present
+
+    - name: Start & Enable httpd service
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true
+
+    - name: Deploy HTML file
+      ansible.builtin.copy:
+        src: "{{ config_file_localhost }}"
+        dest: /var/www/html/index.html
+
+      notify:
+        - restart_apache_service
+
+  handlers:
+  - name: restart_apache_service
+    ansible.builtin.service:
+      name: httpd
+      state: restarted

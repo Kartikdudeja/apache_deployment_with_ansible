@@ -1,0 +1,20 @@
+
+- name: Uninstall Apache Web-Server
+  hosts: nodes
+  become: yes
+  
+  tasks:
+    - name: Stop Apache service
+      ansible.builtin.service:
+        name: httpd
+        state: stopped
+
+    - name: Un-install Apache
+      ansible.builtin.package:
+        name: httpd
+        state: absent
+
+    - name: Remove HTML file
+      ansible.builtin.file:
+        path: /var/www/html/*
+        state: absent
