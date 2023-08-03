@@ -13,7 +13,7 @@ Before running this playbook, ensure the following:
 
 ## Running the Playbook
 
-1. Save the playbook in a file named `apache.yml`.
+1. Save the playbook in a file named `apache.yaml`.
 2. Create an inventory file named `inventory.ini` and specify the target hosts in it.
 3. Execute the following command in the terminal:
 
